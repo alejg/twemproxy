@@ -249,6 +249,9 @@ redis_argn(struct msg *r)
     case MSG_REQ_REDIS_ZREVRANGEBYSCORE:
     case MSG_REQ_REDIS_ZUNIONSTORE:
     case MSG_REQ_REDIS_ZSCAN:
+    case MSG_REQ_REDIS_GEOADD:
+    case MSG_REQ_REDIS_GEOPOS:
+    case MSG_REQ_REDIS_GEORADIUS:
         return true;
 
     default:
@@ -879,6 +882,16 @@ redis_parse_req(struct msg *r)
                     break;
                 }
 
+                if (str6icmp(m, 'g', 'e', 'o', 'a', 'd', 'd')) {
+                    r->type = MSG_REQ_REDIS_GEOADD;
+                    break;
+                }
+
+                if (str6icmp(m, 'g', 'e', 'o', 'p', 'o', 's')) {
+                    r->type = MSG_REQ_REDIS_GEOPOS;
+                    break;
+                }
+
                 break;
 
             case 7:
@@ -997,6 +1010,12 @@ redis_parse_req(struct msg *r)
                     r->type = MSG_REQ_REDIS_ZLEXCOUNT;
                     break;
                 }
+
+                if (str9icmp(m, 'g', 'e', 'o', 'r', 'a', 'd', 'i', 'u', 's')) {
+                    r->type = MSG_REQ_REDIS_GEORADIUS;
+                    break;
+                }
+
 
                 break;
 

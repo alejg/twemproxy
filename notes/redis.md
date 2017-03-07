@@ -332,6 +332,24 @@
 
  * EVAL and EVALSHA support is limited to scripts that take at least 1 key. If multiple keys are used, all keys must hash to the same server. You can ensure this by using the same [hashtag](recommendation.md#hash-tags) for all keys. If you use more than 1 key, the proxy does no checking to verify that all keys hash to the same server, and the entire command is forwarded to the server that the first key hashes to
 
+### Geo
+
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    |      Command      | Supported? | Format                                                                                                              |
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    |      GEOADD       |    Yes     | GEOADD key longitude latitude member [longitude latitude member ...]                                                |
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    |      GEOHASH      |    No      | GEOHASH key member [member ...]                                                                                     |
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    |      GEOPOS       |    Yes     | GEOPOS key member [member ...]                                                                                      |
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    |      GEODIST      |    No      | GEODIST key member1 member2 [unit]
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    |     GEORADIUS     |    Yes     | GEORADIUS key lon lat rad m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT c] [ASC|DESC] [STORE k] [STOREDIST k] |
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+    | GEORADIUSBYMEMBER |    No      | GEORADIUSBYMEMBER k m rad m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT c] [ASC|DESC] [STORE k] [STOREDIST k] |
+    +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
+
 ### Connection
 
     +-------------------+------------+---------------------------------------------------------------------------------------------------------------------+
